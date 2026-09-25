@@ -172,6 +172,26 @@ def test_html_injection_escaping(mock_smtp, client):
         assert "<img src=x" not in html_part
 
 
+@patch("app.smtplib.SMTP_SSL")
+def test_header_injection_newlines_stripped(mock_smtp, client):
+    """Ensure newlines are stripped from name and email to prevent header injection."""
+    with patch.dict("app.config", {"MAIL_USER": "u", "MAIL_PASS": "p", "MAIL_TO": "t"}):
+        resp = post_contact(client, {
+            "name": "Attacker\r\nBcc: evil@domain.com",
+            "email": "a@b.com",
+            "message": "Hi"
+        })
+        assert resp.status_code == 200
+        
+        mock_smtp_instance = mock_smtp.return_value.__enter__.return_value
+        args, _ = mock_smtp_instance.sendmail.call_args
+        email_body = args[2]
+        
+        # Newlines should be replaced with spaces
+        assert "Attacker Bcc: evil@domain.com" in email_body
+        assert "Attacker\r\nBcc" not in email_body
+
+
 # ── SMTP failure ─────────────────────────────────────────────
 @patch("app.smtplib.SMTP_SSL")
 def test_smtp_failure_returns_error(mock_smtp, client):

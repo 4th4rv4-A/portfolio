@@ -7,7 +7,7 @@ A modern, high-performance developer portfolio built with Python, Flask, and van
 - **Backend:** Python 3, Flask, Gunicorn
 - **Frontend:** HTML5, CSS3 (Custom Properties/Variables), Vanilla JavaScript
 - **Data Viz:** Chart.js (Skills Radar)
-- **Deployment:** WSGI-ready, Docker-compatible (Procfile included)
+- **Deployment:** WSGI-ready, PaaS-compatible (Procfile included)
 
 ## Features
 

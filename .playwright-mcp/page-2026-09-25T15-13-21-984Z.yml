@@ -1,0 +1,478 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#home"
+  - navigation "Main navigation" [ref=e3]:
+    - generic [ref=e4]:
+      - link "AM Atharva Meshram" [ref=e5] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=e6]: AM
+        - generic [ref=e7]: Atharva Meshram
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: "#home"
+        - listitem [ref=e11]:
+          - link "Projects" [ref=e12] [cursor=pointer]:
+            - /url: "#projects"
+        - listitem [ref=e13]:
+          - link "About" [ref=e14] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e15]:
+          - link "Experience" [ref=e16] [cursor=pointer]:
+            - /url: "#experience"
+        - listitem [ref=e17]:
+          - link "Skills" [ref=e18] [cursor=pointer]:
+            - /url: "#skills"
+        - listitem [ref=e19]:
+          - link "Achievements" [ref=e20] [cursor=pointer]:
+            - /url: "#hackathons"
+        - listitem [ref=e21]:
+          - link "Leadership" [ref=e22] [cursor=pointer]:
+            - /url: "#leadership"
+        - listitem [ref=e23]:
+          - link "Education" [ref=e24] [cursor=pointer]:
+            - /url: "#education"
+        - listitem [ref=e25]:
+          - link "Certificates" [ref=e26] [cursor=pointer]:
+            - /url: "#certifications"
+        - listitem [ref=e27]:
+          - link "Contact" [ref=e28] [cursor=pointer]:
+            - /url: "#contact"
+      - button "Toggle theme" [ref=e30] [cursor=pointer]
+  - generic [ref=e34]:
+    - generic [ref=e35]:
+      - paragraph [ref=e36]: Hello, I'm
+      - heading "Atharva Anil Meshram" [level=1] [ref=e37]: Atharva AnilMeshram
+      - paragraph [ref=e38]: Python Developer | Aspiring Full-Stack Engineer
+      - paragraph [ref=e39]: B.Tech Computer Technology • Hackathon Participant • ACM Student Member • Campus Ambassador
+      - paragraph [ref=e40]: Exploring internships • Hackathons • Technical collaborations
+      - paragraph [ref=e42]: Nagpur, Maharashtra, India
+      - generic [ref=e46]:
+        - link "View Projects" [ref=e47] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Contact Me" [ref=e51] [cursor=pointer]:
+          - /url: "#contact"
+        - button "Resume Coming Soon" [disabled]:
+          - text: Resume
+          - generic: Coming Soon
+      - generic [ref=e55]:
+        - link "LinkedIn" [ref=e56] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/atharva-meshram-66ab302a5
+        - link "GitHub" [ref=e59] [cursor=pointer]:
+          - /url: https://github.com/4th4rv4-A
+        - link "Email" [ref=e62] [cursor=pointer]:
+          - /url: mailto:meshramatharva257@gmail.com
+    - img "Atharva Anil Meshram" [ref=e68]
+  - generic [ref=e70]:
+    - generic [ref=e71]:
+      - generic [ref=e72]: /01
+      - heading "Featured Projects" [level=2] [ref=e73]
+      - paragraph [ref=e74]: Hackathon builds and technical prototypes
+    - generic [ref=e75]:
+      - article [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e78]: Hackathon
+          - link "View PublicLedger on GitHub" [ref=e81] [cursor=pointer]:
+            - /url: https://github.com/4th4rv4-A/Public-Ledger-AI
+        - heading "PublicLedger" [level=3] [ref=e84]
+        - paragraph [ref=e85]: Government infrastructure transparency dashboard
+        - paragraph [ref=e86]:
+          - strong [ref=e87]: Pallotti National HackFest 2026
+          - text: • Team Leader — Cyber Sparks
+        - paragraph [ref=e88]: Full-stack transparency dashboard for tracking government infrastructure projects. Features Chart.js analytics, Python anomaly flagging, OTP admin access, and a citizen reporting portal.
+        - generic [ref=e89]:
+          - generic [ref=e90]: Python
+          - generic [ref=e91]: Flask
+          - generic [ref=e92]: SQLite
+          - generic [ref=e93]: Chart.js
+          - generic [ref=e94]: HTML5
+          - generic [ref=e95]: CSS3
+          - generic [ref=e96]: JavaScript
+      - article [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]: Hackathon
+          - link "View CyberShield on GitHub" [ref=e102] [cursor=pointer]:
+            - /url: https://github.com/4th4rv4-A/CyberShield_TA0053_
+        - heading "CyberShield" [level=3] [ref=e105]
+        - paragraph [ref=e106]: AI-assisted cybercrime reporting platform
+        - paragraph [ref=e107]:
+          - strong [ref=e108]: Tech Alfa Hackathon
+          - text: • Team Leader — Code Crafters
+        - paragraph [ref=e109]: AI-assisted cybercrime reporting platform for scam awareness and reporting support, powered by natural language processing.
+        - generic [ref=e110]:
+          - generic [ref=e111]: Python
+          - generic [ref=e112]: Flask
+          - generic [ref=e113]: HTML
+          - generic [ref=e114]: CSS
+          - generic [ref=e115]: JavaScript
+          - generic [ref=e116]: NLP
+      - article [ref=e117]:
+        - generic [ref=e118]:
+          - generic [ref=e119]: Prototype
+          - link "View GitHub profile" [ref=e123] [cursor=pointer]:
+            - /url: https://github.com/4th4rv4-A
+        - heading "AI Recruitment Platform" [level=3] [ref=e126]
+        - paragraph [ref=e127]: Rapid prototype built with AI-assisted workflow
+        - paragraph [ref=e128]:
+          - strong [ref=e129]: Agentic Premier League, GDG Nagpur
+          - text: • Rapid Prototype
+        - paragraph [ref=e130]: Rapid prototype built on-the-spot using AI-assisted development workflow during the Agentic Premier League event.
+        - generic [ref=e131]:
+          - generic [ref=e132]: AI
+          - generic [ref=e133]: Rapid Prototyping
+  - generic [ref=e135]:
+    - generic [ref=e136]:
+      - generic [ref=e137]: /02
+      - heading "About Me" [level=2] [ref=e138]
+    - generic [ref=e139]:
+      - paragraph [ref=e140]: I am a second-year B.Tech Computer Technology student at Priyadarshini College of Engineering, Nagpur, with a strong interest in Python development, full-stack engineering, artificial intelligence, and open-source technologies. I completed a Python Developer Internship at Widesoftech Pvt. Ltd. and actively participate in hackathons, campus ambassador programmes, and student technical communities. I'm driven by the desire to solve real problems through software and to continuously grow as a developer.
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]: "4"
+          - generic [ref=e144]: Hackathons
+        - generic [ref=e145]:
+          - generic [ref=e146]: "3"
+          - generic [ref=e147]: Projects Built
+        - generic [ref=e148]:
+          - generic [ref=e149]: "3"
+          - generic [ref=e150]: Ambassador Roles
+      - generic [ref=e151]:
+        - generic [ref=e152]: Python Developer
+        - generic [ref=e156]: Hackathon Participant
+        - generic [ref=e159]: Full-Stack Learner
+        - generic [ref=e162]: ACM Student Member
+  - generic [ref=e169]:
+    - generic [ref=e170]:
+      - generic [ref=e171]: /03
+      - heading "Experience" [level=2] [ref=e172]
+    - list [ref=e173]:
+      - listitem [ref=e174]:
+        - generic [ref=e176]:
+          - heading "Python Intern" [level=3] [ref=e177]
+          - generic [ref=e178]: April 2026 – May 2026
+        - paragraph [ref=e179]: Widesoftech Pvt. Ltd.
+        - paragraph [ref=e180]: Selected through Tech Alfa Hackathon. Gained practical exposure to Python, problem-solving, and software development workflows.
+      - listitem [ref=e181]:
+        - generic [ref=e183]:
+          - heading "College Ambassador" [level=3] [ref=e184]
+          - generic [ref=e185]: July 2026 – Present
+        - paragraph [ref=e186]: Techfest, IIT Bombay
+        - paragraph [ref=e187]: Student outreach and promotion for Techfest 2026–27, Asia's largest science and technology festival. Coordinating campus-level awareness and participation.
+      - listitem [ref=e188]:
+        - generic [ref=e190]:
+          - heading "Campus Ambassador" [level=3] [ref=e191]
+          - generic [ref=e192]: June 2026 – Present
+        - paragraph [ref=e193]: E-Cell, IIT Bombay
+        - paragraph [ref=e194]: Promoting entrepreneurship opportunities and driving community engagement across campus. Connecting students with E-Cell events and resources.
+      - listitem [ref=e195]:
+        - generic [ref=e197]:
+          - heading "Ambassador" [level=3] [ref=e198]
+          - generic [ref=e199]: "2026"
+        - paragraph [ref=e200]: GirlScript Summer of Code 2026
+        - paragraph [ref=e201]: Helping students discover open-source contribution and navigate their first pull requests.
+      - listitem [ref=e202]:
+        - generic [ref=e204]:
+          - heading "SIH 2026 Internal Round Participant" [level=3] [ref=e205]
+          - generic [ref=e206]: 24 Aug 2026
+        - paragraph [ref=e207]: Smart India Hackathon 2026 — PCE Internal Round
+        - paragraph [ref=e208]: Participated in the internal selection round of Smart India Hackathon 2026 held at Priyadarshini College of Engineering, Nagpur.
+  - generic [ref=e210]:
+    - generic [ref=e211]:
+      - generic [ref=e212]: /04
+      - heading "Skills" [level=2] [ref=e213]
+      - paragraph [ref=e214]: Self-assessed proficiency levels
+    - generic [ref=e215]:
+      - img "Skills radar chart showing self-assessed proficiency in Python, JavaScript, Frontend, Backend, Databases, and AI/ML" [ref=e217]
+      - generic [ref=e218]:
+        - generic [ref=e219]:
+          - heading "Programming" [level=3] [ref=e220]
+          - generic [ref=e221]:
+            - button "Python Projects" [ref=e222] [cursor=pointer]:
+              - text: Python
+              - generic [ref=e223]: Projects
+            - button "JavaScript Projects" [ref=e224] [cursor=pointer]:
+              - text: JavaScript
+              - generic [ref=e225]: Projects
+            - generic [ref=e226]:
+              - text: Java
+              - generic [ref=e227]: Learning
+        - generic [ref=e228]:
+          - heading "Frontend & Full-Stack" [level=3] [ref=e229]
+          - generic [ref=e230]:
+            - button "HTML5 Projects" [ref=e231] [cursor=pointer]:
+              - text: HTML5
+              - generic [ref=e232]: Projects
+            - button "CSS3 Projects" [ref=e233] [cursor=pointer]:
+              - text: CSS3
+              - generic [ref=e234]: Projects
+            - generic [ref=e235]:
+              - text: React
+              - generic [ref=e236]: Learning
+            - button "Node.js Familiar" [ref=e237] [cursor=pointer]:
+              - text: Node.js
+              - generic [ref=e238]: Familiar
+        - generic [ref=e239]:
+          - heading "Backend & Databases" [level=3] [ref=e240]
+          - generic [ref=e241]:
+            - button "Flask Projects" [ref=e242] [cursor=pointer]:
+              - text: Flask
+              - generic [ref=e243]: Projects
+            - button "MySQL Familiar" [ref=e244] [cursor=pointer]:
+              - text: MySQL
+              - generic [ref=e245]: Familiar
+            - button "SQLite Projects" [ref=e246] [cursor=pointer]:
+              - text: SQLite
+              - generic [ref=e247]: Projects
+        - generic [ref=e248]:
+          - heading "Dev Tools" [level=3] [ref=e249]
+          - generic [ref=e250]:
+            - generic [ref=e251]: Git
+            - generic [ref=e252]: GitHub
+            - generic [ref=e253]: Visual Studio Code
+        - generic [ref=e254]:
+          - heading "Learning Areas" [level=3] [ref=e255]
+          - generic [ref=e256]:
+            - button "Artificial Intelligence Learning" [ref=e257] [cursor=pointer]:
+              - text: Artificial Intelligence
+              - generic [ref=e258]: Learning
+            - button "Generative AI Learning" [ref=e259] [cursor=pointer]:
+              - text: Generative AI
+              - generic [ref=e260]: Learning
+            - button "Deep Learning Learning" [ref=e261] [cursor=pointer]:
+              - text: Deep Learning
+              - generic [ref=e262]: Learning
+            - generic [ref=e263]:
+              - text: Full-Stack Engineering
+              - generic [ref=e264]: Learning
+            - generic [ref=e265]:
+              - text: Open-Source
+              - generic [ref=e266]: Learning
+            - generic [ref=e267]:
+              - text: Problem Solving
+              - generic [ref=e268]: Learning
+  - generic [ref=e270]:
+    - generic [ref=e271]:
+      - generic [ref=e272]: /05
+      - heading "Hackathons & Achievements" [level=2] [ref=e273]
+    - heading "Hackathons" [level=3] [ref=e274]
+    - generic [ref=e275]:
+      - generic [ref=e276]:
+        - heading "Pallotti National HackFest 2026" [level=4] [ref=e280]
+        - paragraph [ref=e281]: Team Leader • Cyber Sparks
+        - paragraph [ref=e282]:
+          - text: "Project:"
+          - strong [ref=e283]: PublicLedger
+      - generic [ref=e284]:
+        - heading "Tech Alfa Hackathon" [level=4] [ref=e288]
+        - paragraph [ref=e289]: Team Leader • Code Crafters
+        - paragraph [ref=e290]:
+          - text: "Project:"
+          - strong [ref=e291]: CyberShield
+      - generic [ref=e292]:
+        - heading "Agentic Premier League Nagpur 2026" [level=4] [ref=e296]
+        - paragraph [ref=e297]: Participant • GDG Nagpur
+        - paragraph [ref=e298]:
+          - text: "Project:"
+          - strong [ref=e299]: AI Recruitment Platform
+      - generic [ref=e300]:
+        - heading "Smart India Hackathon 2026" [level=4] [ref=e304]
+        - paragraph [ref=e305]: Internal Round • PCE Nagpur
+        - paragraph [ref=e306]: 24 August 2026
+        - paragraph [ref=e307]: Participant
+    - heading "Ambassador Programmes" [level=3] [ref=e308]
+    - generic [ref=e309]:
+      - generic [ref=e310]:
+        - heading "Techfest, IIT Bombay" [level=4] [ref=e317]
+        - paragraph [ref=e318]: College Ambassador
+        - paragraph [ref=e319]: 2026–27
+      - generic [ref=e320]:
+        - heading "E-Cell, IIT Bombay" [level=4] [ref=e327]
+        - paragraph [ref=e328]: Campus Ambassador
+        - paragraph [ref=e329]: "2026"
+      - generic [ref=e330]:
+        - heading "GirlScript Summer of Code" [level=4] [ref=e337]
+        - paragraph [ref=e338]: Ambassador
+        - paragraph [ref=e339]: "2026"
+  - generic [ref=e341]:
+    - generic [ref=e342]:
+      - generic [ref=e343]: /06
+      - heading "Leadership" [level=2] [ref=e344]
+    - generic [ref=e345]:
+      - generic [ref=e346]:
+        - heading "Technical Team Member" [level=3] [ref=e348]
+        - paragraph [ref=e349]: SCOOP Forum, PCE
+        - paragraph [ref=e350]: July 2026 – Present
+        - paragraph [ref=e351]: Contributing to technical initiatives, event planning, and knowledge-sharing activities within the college's student community forum.
+      - generic [ref=e352]:
+        - heading "Event Management Team" [level=3] [ref=e354]
+        - paragraph [ref=e355]: PCE ACM Student Chapter
+        - paragraph [ref=e356]: July 2026 – Present
+        - paragraph [ref=e357]: Coordinating technical events, workshops, and seminars for the ACM student chapter. Managing logistics and participant communication.
+      - generic [ref=e358]:
+        - heading "Public Relations Team" [level=3] [ref=e360]
+        - paragraph [ref=e361]: PCE ACM-W Student Chapter
+        - paragraph [ref=e362]: July 2026 – Present
+        - paragraph [ref=e363]: Supporting outreach, social media, and community building for ACM-W. Promoting diversity and inclusion in computing.
+  - generic [ref=e365]:
+    - generic [ref=e366]:
+      - generic [ref=e367]: /07
+      - heading "Education" [level=2] [ref=e368]
+    - generic [ref=e369]:
+      - generic [ref=e370]:
+        - generic [ref=e371]: Pursuing
+        - heading "B.Tech — Computer Technology" [level=3] [ref=e372]
+        - paragraph [ref=e373]: Priyadarshini College of Engineering, Nagpur
+        - paragraph [ref=e374]: 2025 – 2029
+        - paragraph [ref=e375]: "Focus areas: Deep Learning & Generative AI, Full-Stack Development"
+      - generic [ref=e376]:
+        - generic [ref=e377]: Completed
+        - heading "HSC — PCM" [level=3] [ref=e378]
+        - paragraph [ref=e379]: Dr. S. C. Gulhane Prerna College
+        - paragraph [ref=e380]: 2023 – 2025
+        - generic [ref=e381]:
+          - generic [ref=e382]: "Score: 69%"
+          - generic [ref=e383]: "MHT-CET 2025: 85.90 percentile"
+  - generic [ref=e385]:
+    - generic [ref=e386]:
+      - generic [ref=e387]: /08
+      - heading "Certifications & Credentials" [level=2] [ref=e388]
+    - heading "Certifications" [level=3] [ref=e389]
+    - generic [ref=e390]:
+      - generic [ref=e391]:
+        - generic [ref=e392]:
+          - 'img "MongoDB Overview: Core Concepts and Architecture certificate" [ref=e393]'
+          - text: View Full
+        - generic [ref=e394]:
+          - 'heading "MongoDB Overview: Core Concepts and Architecture" [level=4] [ref=e395]'
+          - paragraph [ref=e396]: MongoDB, Inc.
+          - paragraph [ref=e397]: 17 August 2026
+          - link "Verify on Credly ↗" [ref=e398] [cursor=pointer]:
+            - /url: https://www.credly.com/badges/325d0a9f-320f-4992-bc78-e855a6a7b2b6
+      - generic [ref=e399]:
+        - generic [ref=e400]:
+          - img "Python Internship certificate from Widesoftech" [ref=e401]
+          - text: View Full
+        - generic [ref=e402]:
+          - heading "Python Internship Certificate" [level=4] [ref=e403]
+          - paragraph [ref=e404]: Widesoftech Pvt. Ltd.
+          - paragraph [ref=e405]: April – May 2026
+      - generic [ref=e406]:
+        - generic [ref=e407]:
+          - img "Interview Preparation Workshop certificate from GeeksforGeeks" [ref=e408]
+          - text: View Full
+        - generic [ref=e409]:
+          - heading "Interview Preparation Workshop" [level=4] [ref=e410]
+          - paragraph [ref=e411]: GeeksforGeeks × PCE Campus Body
+          - paragraph [ref=e412]: "2026"
+      - generic [ref=e413]:
+        - generic [ref=e414]:
+          - img "Local Code to Live URL Workshop certificate" [ref=e415]
+          - text: View Full
+        - generic [ref=e416]:
+          - heading "Local Code to Live URL Workshop" [level=4] [ref=e417]
+          - paragraph [ref=e418]: KDK College of Engineering
+          - paragraph [ref=e419]: 6 March 2026
+    - heading "Hackathon Credentials" [level=3] [ref=e420]
+    - generic [ref=e421]:
+      - generic [ref=e422]:
+        - generic [ref=e423]:
+          - img "Pallotti National HackFest 2026 credential" [ref=e424]
+          - text: View Full
+        - generic [ref=e425]:
+          - heading "Pallotti National HackFest 2026" [level=4] [ref=e426]
+          - paragraph [ref=e427]: St. Vincent Pallotti College
+          - paragraph [ref=e428]: 28–29 April 2026
+      - generic [ref=e429]:
+        - generic [ref=e430]:
+          - img "Tech Alfa Hackathon 2026 credential" [ref=e431]
+          - text: View Full
+        - generic [ref=e432]:
+          - heading "Tech Alfa Hackathon 2026" [level=4] [ref=e433]
+          - paragraph [ref=e434]: Widesoftech Pvt. Ltd.
+          - paragraph [ref=e435]: 21–22 February 2026
+    - heading "Offer Letters & Selections" [level=3] [ref=e436]
+    - generic [ref=e437]:
+      - generic [ref=e438]:
+        - generic [ref=e439]:
+          - img "Widesoftech Python Internship offer letter" [ref=e440]
+          - text: View Full
+        - generic [ref=e441]:
+          - heading "Python Internship Offer Letter" [level=4] [ref=e442]
+          - paragraph [ref=e443]: Widesoftech Pvt. Ltd.
+          - paragraph [ref=e444]: "2026"
+      - generic [ref=e445]:
+        - generic [ref=e446]:
+          - img "Techfest IIT Bombay College Ambassador offer letter" [ref=e447]
+          - text: View Full
+        - generic [ref=e448]:
+          - heading "Techfest College Ambassador" [level=4] [ref=e449]
+          - paragraph [ref=e450]: Techfest, IIT Bombay
+          - paragraph [ref=e451]: "2026"
+      - generic [ref=e452]:
+        - generic [ref=e453]:
+          - img "E-Cell IIT Bombay Campus Ambassador offer letter" [ref=e454]
+          - text: View Full
+        - generic [ref=e455]:
+          - heading "E-Cell Campus Ambassador" [level=4] [ref=e456]
+          - paragraph [ref=e457]: E-Cell, IIT Bombay
+          - paragraph [ref=e458]: "2026"
+      - generic [ref=e459]:
+        - generic [ref=e460]:
+          - img "GirlScript Summer of Code 2026 Ambassador badge" [ref=e461]
+          - text: View Full
+        - generic [ref=e462]:
+          - heading "GSSoC 2026 Ambassador" [level=4] [ref=e463]
+          - paragraph [ref=e464]: GirlScript Foundation
+          - paragraph [ref=e465]: "2026"
+  - generic [ref=e467]:
+    - generic [ref=e468]:
+      - generic [ref=e469]: /09
+      - heading "Get In Touch" [level=2] [ref=e470]
+    - generic [ref=e471]:
+      - generic [ref=e472]:
+        - paragraph [ref=e473]: Have a question, want to collaborate, or just say hello? I'd love to hear from you!
+        - generic [ref=e474]:
+          - link "LinkedIn" [ref=e475] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/atharva-meshram-66ab302a5
+          - link "GitHub" [ref=e479] [cursor=pointer]:
+            - /url: https://github.com/4th4rv4-A
+          - link "meshramatharva257@gmail.com" [ref=e483] [cursor=pointer]:
+            - /url: mailto:meshramatharva257@gmail.com
+      - generic [ref=e488]:
+        - generic [ref=e489]:
+          - generic [ref=e490]: Name
+          - textbox "Name" [ref=e491]:
+            - /placeholder: Your name
+        - generic [ref=e492]:
+          - generic [ref=e493]: Email
+          - textbox "Email" [ref=e494]:
+            - /placeholder: you@example.com
+        - generic [ref=e495]:
+          - generic [ref=e496]: Message
+          - textbox "Message" [ref=e497]:
+            - /placeholder: Your message…
+        - button "Send Message" [ref=e498] [cursor=pointer]
+  - contentinfo [ref=e503]:
+    - generic [ref=e504]:
+      - generic [ref=e505]:
+        - paragraph [ref=e506]: Atharva Anil Meshram
+        - paragraph [ref=e507]: B.Tech Computer Technology • Aspiring Full-Stack Developer
+      - generic [ref=e508]:
+        - link "LinkedIn" [ref=e509] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/atharva-meshram-66ab302a5
+        - link "GitHub" [ref=e512] [cursor=pointer]:
+          - /url: https://github.com/4th4rv4-A
+        - link "Email" [ref=e515] [cursor=pointer]:
+          - /url: mailto:meshramatharva257@gmail.com
+      - paragraph [ref=e519]: © 2026 Atharva Anil Meshram. Built with Flask & vanilla JavaScript.
+  - dialog [ref=e521]:
+    - generic [ref=e522]:
+      - generic [ref=e523]: "MongoDB Overview: Core Concepts and Architecture"
+      - generic [ref=e524]:
+        - button "Zoom out" [ref=e525] [cursor=pointer]
+        - button "Zoom in" [ref=e529] [cursor=pointer]
+        - button "Close" [ref=e533] [cursor=pointer]
+    - generic [ref=e537]:
+      - 'img "MongoDB Overview: Core Concepts and Architecture certificate" [ref=e538]'
+      - button "Previous" [ref=e539] [cursor=pointer]
+      - button "Next" [ref=e542] [cursor=pointer]

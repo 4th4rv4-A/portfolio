@@ -15,12 +15,17 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 from flask import Flask, render_template, request, jsonify
+from werkzeug.middleware.proxy_fix import ProxyFix
+import random
 
 # ---------------------------------------------------------------------------
 # App setup
 # ---------------------------------------------------------------------------
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024  # 16 KB max request size
+
+# Configure proxy handling so rate limiting works correctly on deployments like Vercel
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
 # Use a secret key from env (needed for session security if ever used)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-change-me-in-production")
@@ -93,6 +98,13 @@ MAX_MESSAGE_LEN = 5000
 def _is_rate_limited(ip: str) -> bool:
     """Return True if *ip* has exceeded RATE_LIMIT requests within RATE_WINDOW."""
     now = time.time()
+
+    # Probabilistically clean up stale IPs to prevent unbounded memory growth
+    if random.random() < 0.05:
+        stale_keys = [k for k, timestamps in _rate_store.items() if not [t for t in timestamps if now - t < RATE_WINDOW]]
+        for k in stale_keys:
+            _rate_store.pop(k, None)
+
     # Prune timestamps older than the window
     _rate_store[ip] = [t for t in _rate_store[ip] if now - t < RATE_WINDOW]
     if len(_rate_store[ip]) >= RATE_LIMIT:
@@ -157,7 +169,7 @@ def _send_email(name: str, email: str, message: str) -> bool:
 
     try:
         context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
+        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context, timeout=10) as server:
             server.login(MAIL_USER, MAIL_PASS)
             server.sendmail(MAIL_USER, MAIL_TO, msg.as_string())
         logger.info("Email sent successfully.")
@@ -176,7 +188,7 @@ def set_security_headers(response):
     # CSP compatible with Google Fonts CDN, Chart.js CDN, and inline theme script
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+        "script-src 'self' https://cdn.jsdelivr.net; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "img-src 'self' data: https:; "
@@ -227,8 +239,9 @@ def contact():
     if not isinstance(raw_name, str) or not isinstance(raw_email, str) or not isinstance(raw_message, str):
         return jsonify({"success": False, "message": "Invalid data format for fields."}), 400
 
-    name = raw_name.strip()
-    email = raw_email.strip()
+    # Strip out newlines from name and email to prevent header injection
+    name = re.sub(r'[\r\n\t]+', ' ', raw_name).strip()
+    email = re.sub(r'[\r\n\t]+', ' ', raw_email).strip()
     message = raw_message.strip()
 
     # --- Honeypot check (server-side) ---

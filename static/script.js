@@ -146,7 +146,8 @@
         if (!bar) return { init: () => {} };
 
         function onScroll() {
-            const progress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
             bar.style.transform = `scaleX(${Math.min(progress, 1)})`;
         }
 
@@ -405,13 +406,18 @@
                 chip.addEventListener('mouseenter', () => {
                     if (!chart) return;
                     const axis = parseInt(chip.dataset.axis);
-                    const newData = [85, 75, 80, 70, 65, 50].map((v, i) => i === axis ? v + 10 : v * 0.5);
-                    chart.data.datasets[0].data = newData;
+                    chart.data.datasets[0].pointBackgroundColor = [85, 75, 80, 70, 65, 50].map((_, i) => 
+                        i === axis ? '#ffffff' : chart.data.datasets[0].borderColor
+                    );
+                    chart.data.datasets[0].pointRadius = [85, 75, 80, 70, 65, 50].map((_, i) => 
+                        i === axis ? 8 : 4
+                    );
                     chart.update();
                 });
                 chip.addEventListener('mouseleave', () => {
                     if (!chart) return;
-                    chart.data.datasets[0].data = [85, 75, 80, 70, 65, 50];
+                    chart.data.datasets[0].pointBackgroundColor = chart.data.datasets[0].borderColor;
+                    chart.data.datasets[0].pointRadius = 4;
                     chart.update();
                 });
             });
@@ -479,7 +485,10 @@
             updateContent();
             lb.classList.add('open');
             document.body.style.overflow = 'hidden';
-            qs('#lb-close').focus();
+            setTimeout(() => {
+                const closeBtn = qs('#lb-close', lb);
+                if (closeBtn) closeBtn.focus();
+            }, 50);
         }
 
         function close() {
@@ -512,9 +521,22 @@
             
             document.addEventListener('keydown', e => {
                 if (!lb.classList.contains('open')) return;
-                if (e.key === 'Escape') close();
-                if (e.key === 'ArrowLeft') qs('#lb-prev').click();
-                if (e.key === 'ArrowRight') qs('#lb-next').click();
+                if (e.key === 'Escape') { close(); return; }
+                if (e.key === 'ArrowLeft') { qs('#lb-prev', lb).click(); return; }
+                if (e.key === 'ArrowRight') { qs('#lb-next', lb).click(); return; }
+                if (e.key === 'Tab') {
+                    const focusable = Array.from(lb.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+                    if (focusable.length === 0) return;
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
             });
         }
 
