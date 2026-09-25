@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atharva Anil Meshram — Python Developer &amp; Aspiring Full-Stack Engineer</title>
+    <meta name="description" content="Portfolio of Atharva Anil Meshram — Python Developer, Full-Stack Learner, Hackathon Participant, and B.Tech Computer Technology student at PCE Nagpur." />
+    <meta name="author" content="Atharva Anil Meshram" />
+    <meta name="theme-color" content="#030308" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Atharva Meshram | Portfolio" />
+    <meta property="og:description" content="B.Tech Computer Technology student at PCE Nagpur. Full-stack developer &amp; AI enthusiast." />
+    <meta property="og:type" content="website" />
+    {% if site_url %}
+    <link rel="canonical" href="{{ site_url }}/" />
+    <meta property="og:url" content="{{ site_url }}/" />
+    <meta property="og:image" content="{{ site_url }}{{ url_for('static', filename='assets/social-preview.png') }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="{{ site_url }}{{ url_for('static', filename='assets/social-preview.png') }}" />
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Atharva Meshram | Portfolio" />
+    <meta name="twitter:description" content="B.Tech Computer Technology student at PCE Nagpur. Full-stack developer &amp; AI enthusiast." />
+
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Atharva Anil Meshram",
+      "description": "B.Tech Computer Technology student and aspiring full-stack developer",
+      "sameAs": [
+        "https://www.linkedin.com/in/atharva-meshram-66ab302a5",
+        "https://github.com/4th4rv4-A"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Priyadarshini College of Engineering, Nagpur"
+      },
+      "knowsAbout": ["Python", "Flask", "JavaScript", "Full-Stack Development", "Artificial Intelligence", "Machine Learning"]
+    }
+    </script>
+
+    <!-- Prevent theme flash -->
+    <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon-32x32.png') }}" type="image/png" sizes="32x32" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon-16x16.png') }}" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/apple-touch-icon.png') }}" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+    <!-- Skip to content (a11y) -->
+    <a href="#home" class="skip-link">Skip to main content</a>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Atmosphere Canvas -->
+    <canvas id="atmosphere" class="atmosphere" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- Cursor glow (JS-driven) -->
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+    <!-- ============================================================
+         NAVBAR
+    ============================================================= -->
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+        <div class="navbar__inner container">
+            <a href="#home" class="navbar__logo">
+                <span class="navbar__logo-mono">AM</span>
+                <span class="navbar__logo-name">Atharva Meshram</span>
+            </a>
+
+            <ul class="navbar__links" id="nav-links" role="list">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#hackathons" class="nav-link">Achievements</a></li>
+                <li><a href="#leadership" class="nav-link">Leadership</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#certifications" class="nav-link">Certificates</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="navbar__actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="theme-toggle__sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="theme-toggle__moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         HERO
+    ============================================================= -->
+    <section class="hero" id="home">
+        <div class="hero__content container reveal">
+            <div class="hero__text">
+                <p class="hero__greeting">Hello, I'm</p>
+                <h1 class="hero__name">Atharva Anil<br />Meshram</h1>
+                <p class="hero__title">Python Developer <span style="color:var(--muted)">|</span> Aspiring Full-Stack Engineer</p>
+                <p class="hero__subtitle">B.Tech Computer Technology &bull; Hackathon Participant &bull; ACM Student Member &bull; Campus Ambassador</p>
+                <p class="hero__status">
+                    <span class="hero__status-dot"></span>
+                    Exploring internships &bull; Hackathons &bull; Technical collaborations
+                </p>
+                <p class="hero__location">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Nagpur, Maharashtra, India
+                </p>
+                <div class="hero__buttons">
+                    <a href="#projects" class="btn btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        View Projects
+                    </a>
+                    <a href="#contact" class="btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Contact Me
+                    </a>
+                    <!-- Resume: conditionally rendered based on file existence -->
+                    {% if resume_exists %}
+                    <a href="{{ url_for('static', filename='assets/resume.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn btn--resume">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        View Resume
+                    </a>
+                    {% else %}
+                    <button class="btn btn--resume" id="resume-btn" disabled title="Resume coming soon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Resume <span class="btn__badge">Coming Soon</span>
+                    </button>
+                    {% endif %}
+                </div>
+                <div class="hero__socials">
+                    <a href="https://www.linkedin.com/in/atharva-meshram-66ab302a5" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://github.com/4th4rv4-A" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                    <a href="mailto:meshramatharva257@gmail.com" aria-label="Email" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero__visual">
+                <div class="hero__ring">
+                    <img
+                        src="{{ url_for('static', filename='assets/profile/atharva-meshram.jpg') }}"
+                        alt="Atharva Anil Meshram"
+                        class="hero__image"
+                        width="280" height="280"
+                        fetchpriority="high"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    />
+                    <div class="hero__image-fallback" style="display:none;">AM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS (moved up — strongest section)
+    ============================================================= -->
+    <section class="section" id="projects">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">01</span>
+                <h2 class="section__title">Featured Projects</h2>
+                <p class="section__subtitle">Hackathon builds and technical prototypes</p>
+            </header>
+            <div class="projects__grid reveal-group">
+                <!-- Project 1: PublicLedger -->
+                <article class="project-card reveal" data-tilt>
+                    <div class="project-card__header">
+                        <span class="project-card__tag">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Hackathon
+                        </span>
+                        <a href="https://github.com/4th4rv4-A/Public-Ledger-AI" target="_blank" rel="noopener noreferrer" class="project-card__github" aria-label="View PublicLedger on GitHub">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </div>
+                    <h3 class="project-card__title">PublicLedger</h3>
+                    <p class="project-card__tagline">Government infrastructure transparency dashboard</p>
+                    <p class="project-card__meta"><strong>Pallotti National HackFest 2026</strong> &bull; Team Leader — Cyber Sparks</p>
+                    <p class="project-card__desc">Full-stack transparency dashboard for tracking government infrastructure projects. Features Chart.js analytics, Python anomaly flagging, OTP admin access, and a citizen reporting portal.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Chart.js</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </article>
+
+                <!-- Project 2: CyberShield -->
+                <article class="project-card reveal" data-tilt>
+                    <div class="project-card__header">
+                        <span class="project-card__tag">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Hackathon
+                        </span>
+                        <a href="https://github.com/4th4rv4-A/CyberShield_TA0053_" target="_blank" rel="noopener noreferrer" class="project-card__github" aria-label="View CyberShield on GitHub">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </div>
+                    <h3 class="project-card__title">CyberShield</h3>
+                    <p class="project-card__tagline">AI-assisted cybercrime reporting platform</p>
+                    <p class="project-card__meta"><strong>Tech Alfa Hackathon</strong> &bull; Team Leader — Code Crafters</p>
+                    <p class="project-card__desc">AI-assisted cybercrime reporting platform for scam awareness and reporting support, powered by natural language processing.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">NLP</span>
+                    </div>
+                </article>
+
+                <!-- Project 3: AI Recruitment Platform -->
+                <article class="project-card reveal" data-tilt>
+                    <div class="project-card__header">
+                        <span class="project-card__tag">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            Prototype
+                        </span>
+                        <a href="https://github.com/4th4rv4-A" target="_blank" rel="noopener noreferrer" class="project-card__github" aria-label="View GitHub profile">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                    </div>
+                    <h3 class="project-card__title">AI Recruitment Platform</h3>
+                    <p class="project-card__tagline">Rapid prototype built with AI-assisted workflow</p>
+                    <p class="project-card__meta"><strong>Agentic Premier League, GDG Nagpur</strong> &bull; Rapid Prototype</p>
+                    <p class="project-card__desc">Rapid prototype built on-the-spot using AI-assisted development workflow during the Agentic Premier League event.</p>
+                    <div class="project-card__tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Rapid Prototyping</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT
+    ============================================================= -->
+    <section class="section" id="about">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">02</span>
+                <h2 class="section__title">About Me</h2>
+            </header>
+            <div class="about__content reveal">
+                <p class="about__bio">
+                    I am a second-year B.Tech Computer Technology student at Priyadarshini College of Engineering, Nagpur,
+                    with a strong interest in Python development, full-stack engineering, artificial intelligence,
+                    and open-source technologies. I completed a Python Developer Internship at Widesoftech Pvt. Ltd.
+                    and actively participate in hackathons, campus ambassador programmes, and student technical communities.
+                    I'm driven by the desire to solve real problems through software and to continuously grow as a developer.
+                </p>
+                <div class="about__highlights">
+                    <div class="about__highlight-item reveal">
+                        <span class="about__highlight-number" data-count="4">4</span>
+                        <span class="about__highlight-label">Hackathons</span>
+                    </div>
+                    <div class="about__highlight-item reveal">
+                        <span class="about__highlight-number" data-count="3">3</span>
+                        <span class="about__highlight-label">Projects Built</span>
+                    </div>
+                    <div class="about__highlight-item reveal">
+                        <span class="about__highlight-number" data-count="3">3</span>
+                        <span class="about__highlight-label">Ambassador Roles</span>
+                    </div>
+                </div>
+                <div class="about__badges reveal-group">
+                    <span class="badge reveal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        Python Developer
+                    </span>
+                    <span class="badge reveal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Hackathon Participant
+                    </span>
+                    <span class="badge reveal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Full-Stack Learner
+                    </span>
+                    <span class="badge reveal">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        ACM Student Member
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         EXPERIENCE
+    ============================================================= -->
+    <section class="section" id="experience">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">03</span>
+                <h2 class="section__title">Experience</h2>
+            </header>
+            <ol class="timeline reveal-group">
+                <li class="timeline__card reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__header">
+                        <h3 class="timeline__role">Python Intern</h3>
+                        <span class="timeline__date">April 2026 – May 2026</span>
+                    </div>
+                    <p class="timeline__company">Widesoftech Pvt. Ltd.</p>
+                    <p class="timeline__desc">Selected through Tech Alfa Hackathon. Gained practical exposure to Python, problem-solving, and software development workflows.</p>
+                </li>
+                <li class="timeline__card reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__header">
+                        <h3 class="timeline__role">College Ambassador</h3>
+                        <span class="timeline__date">July 2026 – Present</span>
+                    </div>
+                    <p class="timeline__company">Techfest, IIT Bombay</p>
+                    <p class="timeline__desc">Student outreach and promotion for Techfest 2026–27, Asia's largest science and technology festival. Coordinating campus-level awareness and participation.</p>
+                </li>
+                <li class="timeline__card reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__header">
+                        <h3 class="timeline__role">Campus Ambassador</h3>
+                        <span class="timeline__date">June 2026 – Present</span>
+                    </div>
+                    <p class="timeline__company">E-Cell, IIT Bombay</p>
+                    <p class="timeline__desc">Promoting entrepreneurship opportunities and driving community engagement across campus. Connecting students with E-Cell events and resources.</p>
+                </li>
+                <li class="timeline__card reveal">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__header">
+                        <h3 class="timeline__role">Ambassador</h3>
+                        <span class="timeline__date">2026</span>
+                    </div>
+                    <p class="timeline__company">GirlScript Summer of Code 2026</p>
+                    <p class="timeline__desc">Helping students discover open-source contribution and navigate their first pull requests.</p>
+                </li>
+                <li class="timeline__card reveal">
+                    <div class="timeline__dot timeline__dot--green"></div>
+                    <div class="timeline__header">
+                        <h3 class="timeline__role">SIH 2026 Internal Round Participant</h3>
+                        <span class="timeline__date">24 Aug 2026</span>
+                    </div>
+                    <p class="timeline__company">Smart India Hackathon 2026 — PCE Internal Round</p>
+                    <p class="timeline__desc">Participated in the internal selection round of Smart India Hackathon 2026 held at Priyadarshini College of Engineering, Nagpur.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SKILLS
+    ============================================================= -->
+    <section class="section" id="skills">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">04</span>
+                <h2 class="section__title">Skills</h2>
+                <p class="section__subtitle">Self-assessed proficiency levels</p>
+            </header>
+            <div class="skills__content reveal">
+                <div class="skills__radar-wrap">
+                    <canvas id="skills-radar" width="320" height="320" aria-label="Skills radar chart showing self-assessed proficiency in Python, JavaScript, Frontend, Backend, Databases, and AI/ML" role="img"></canvas>
+                </div>
+                <div class="skills__categories">
+                    <div>
+                        <h3 class="skills__category-title">Programming</h3>
+                        <div class="skills__chip-list">
+                            <button class="skill-chip" type="button" data-axis="0" aria-pressed="false">Python <small class="chip-projects">Projects</small></button>
+                            <button class="skill-chip" type="button" data-axis="1" aria-pressed="false">JavaScript <small class="chip-projects">Projects</small></button>
+                            <span class="skill-chip">Java <small class="chip-learning">Learning</small></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="skills__category-title">Frontend &amp; Full-Stack</h3>
+                        <div class="skills__chip-list">
+                            <button class="skill-chip" type="button" data-axis="2" aria-pressed="false">HTML5 <small class="chip-projects">Projects</small></button>
+                            <button class="skill-chip" type="button" data-axis="2" aria-pressed="false">CSS3 <small class="chip-projects">Projects</small></button>
+                            <span class="skill-chip">React <small class="chip-learning">Learning</small></span>
+                            <button class="skill-chip" type="button" data-axis="3" aria-pressed="false">Node.js <small class="chip-familiar">Familiar</small></button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="skills__category-title">Backend &amp; Databases</h3>
+                        <div class="skills__chip-list">
+                            <button class="skill-chip" type="button" data-axis="3" aria-pressed="false">Flask <small class="chip-projects">Projects</small></button>
+                            <button class="skill-chip" type="button" data-axis="4" aria-pressed="false">MySQL <small class="chip-familiar">Familiar</small></button>
+                            <button class="skill-chip" type="button" data-axis="4" aria-pressed="false">SQLite <small class="chip-projects">Projects</small></button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="skills__category-title">Dev Tools</h3>
+                        <div class="skills__chip-list">
+                            <span class="skill-chip">Git</span>
+                            <span class="skill-chip">GitHub</span>
+                            <span class="skill-chip">Visual Studio Code</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="skills__category-title">Learning Areas</h3>
+                        <div class="skills__chip-list">
+                            <button class="skill-chip" type="button" data-axis="5" aria-pressed="false">Artificial Intelligence <small class="chip-learning">Learning</small></button>
+                            <button class="skill-chip" type="button" data-axis="5" aria-pressed="false">Generative AI <small class="chip-learning">Learning</small></button>
+                            <button class="skill-chip" type="button" data-axis="5" aria-pressed="false">Deep Learning <small class="chip-learning">Learning</small></button>
+                            <span class="skill-chip">Full-Stack Engineering <small class="chip-learning">Learning</small></span>
+                            <span class="skill-chip">Open-Source <small class="chip-learning">Learning</small></span>
+                            <span class="skill-chip">Problem Solving <small class="chip-learning">Learning</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HACKATHONS & ACHIEVEMENTS
+    ============================================================= -->
+    <section class="section" id="hackathons">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">05</span>
+                <h2 class="section__title">Hackathons &amp; Achievements</h2>
+            </header>
+
+            <h3 class="subsection__title reveal">Hackathons</h3>
+            <div class="hackathons__grid reveal-group">
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">Pallotti National HackFest 2026</h4>
+                    <p class="hackathon-card__meta">Team Leader &bull; Cyber Sparks</p>
+                    <p class="hackathon-card__project">Project: <strong>PublicLedger</strong></p>
+                </div>
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">Tech Alfa Hackathon</h4>
+                    <p class="hackathon-card__meta">Team Leader &bull; Code Crafters</p>
+                    <p class="hackathon-card__project">Project: <strong>CyberShield</strong></p>
+                </div>
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">Agentic Premier League Nagpur 2026</h4>
+                    <p class="hackathon-card__meta">Participant &bull; GDG Nagpur</p>
+                    <p class="hackathon-card__project">Project: <strong>AI Recruitment Platform</strong></p>
+                </div>
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon hackathon-card__icon--green">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">Smart India Hackathon 2026</h4>
+                    <p class="hackathon-card__meta">Internal Round &bull; PCE Nagpur</p>
+                    <p class="hackathon-card__meta">24 August 2026</p>
+                    <p class="hackathon-card__project">Participant</p>
+                </div>
+            </div>
+
+            <h3 class="subsection__title reveal" style="margin-top: var(--space-xl);">Ambassador Programmes</h3>
+            <div class="hackathons__grid reveal-group">
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon hackathon-card__icon--blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">Techfest, IIT Bombay</h4>
+                    <p class="hackathon-card__meta">College Ambassador</p>
+                    <p class="hackathon-card__project">2026–27</p>
+                </div>
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon hackathon-card__icon--blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">E-Cell, IIT Bombay</h4>
+                    <p class="hackathon-card__meta">Campus Ambassador</p>
+                    <p class="hackathon-card__project">2026</p>
+                </div>
+                <div class="hackathon-card reveal">
+                    <div class="hackathon-card__icon hackathon-card__icon--blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h4 class="hackathon-card__title">GirlScript Summer of Code</h4>
+                    <p class="hackathon-card__meta">Ambassador</p>
+                    <p class="hackathon-card__project">2026</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         LEADERSHIP
+    ============================================================= -->
+    <section class="section" id="leadership">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">06</span>
+                <h2 class="section__title">Leadership</h2>
+            </header>
+            <div class="leadership__grid reveal-group">
+                <div class="leadership-card reveal">
+                    <div class="leadership-card__bar leadership-card__bar--accent"></div>
+                    <h3 class="leadership-card__role">Technical Team Member</h3>
+                    <p class="leadership-card__org">SCOOP Forum, PCE</p>
+                    <p class="leadership-card__date">July 2026 – Present</p>
+                    <p class="leadership-card__desc">Contributing to technical initiatives, event planning, and knowledge-sharing activities within the college's student community forum.</p>
+                </div>
+                <div class="leadership-card reveal">
+                    <div class="leadership-card__bar leadership-card__bar--warn"></div>
+                    <h3 class="leadership-card__role">Event Management Team</h3>
+                    <p class="leadership-card__org">PCE ACM Student Chapter</p>
+                    <p class="leadership-card__date">July 2026 – Present</p>
+                    <p class="leadership-card__desc">Coordinating technical events, workshops, and seminars for the ACM student chapter. Managing logistics and participant communication.</p>
+                </div>
+                <div class="leadership-card reveal">
+                    <div class="leadership-card__bar leadership-card__bar--mixed"></div>
+                    <h3 class="leadership-card__role">Public Relations Team</h3>
+                    <p class="leadership-card__org">PCE ACM-W Student Chapter</p>
+                    <p class="leadership-card__date">July 2026 – Present</p>
+                    <p class="leadership-card__desc">Supporting outreach, social media, and community building for ACM-W. Promoting diversity and inclusion in computing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         EDUCATION
+    ============================================================= -->
+    <section class="section" id="education">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">07</span>
+                <h2 class="section__title">Education</h2>
+            </header>
+            <div class="education__grid reveal-group">
+                <div class="education-card reveal">
+                    <div class="education-card__badge">Pursuing</div>
+                    <h3 class="education-card__degree">B.Tech — Computer Technology</h3>
+                    <p class="education-card__school">Priyadarshini College of Engineering, Nagpur</p>
+                    <p class="education-card__year">2025 – 2029</p>
+                    <p class="education-card__note">Focus areas: Deep Learning &amp; Generative AI, Full-Stack Development</p>
+                </div>
+                <div class="education-card reveal">
+                    <div class="education-card__badge">Completed</div>
+                    <h3 class="education-card__degree">HSC — PCM</h3>
+                    <p class="education-card__school">Dr. S. C. Gulhane Prerna College</p>
+                    <p class="education-card__year">2023 – 2025</p>
+                    <div class="education-card__extras">
+                        <span class="tag">Score: 69%</span>
+                        <span class="tag">MHT-CET 2025: 85.90 percentile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CERTIFICATIONS & CREDENTIALS
+    ============================================================= -->
+    <section class="section" id="certifications">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">08</span>
+                <h2 class="section__title">Certifications &amp; Credentials</h2>
+            </header>
+
+            <h3 class="subsection__title reveal">Certifications</h3>
+            <div class="certifications__grid reveal-group">
+                <div class="cert-card reveal" data-cert-index="0">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/mongodb-overview-certificate.jpg') }}" alt="MongoDB Overview: Core Concepts and Architecture certificate" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">MongoDB Overview: Core Concepts and Architecture</h4>
+                        <p class="cert-card__org">MongoDB, Inc.</p>
+                        <p class="cert-card__date">17 August 2026</p>
+                        <a href="https://www.credly.com/badges/325d0a9f-320f-4992-bc78-e855a6a7b2b6" target="_blank" rel="noopener" class="cert-card__verify">Verify on Credly ↗</a>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="1">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/widesoftech-python-internship-certificate.jpg') }}" alt="Python Internship certificate from Widesoftech" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Python Internship Certificate</h4>
+                        <p class="cert-card__org">Widesoftech Pvt. Ltd.</p>
+                        <p class="cert-card__date">April – May 2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="2">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/gfg-interview-prep-workshop.png') }}" alt="Interview Preparation Workshop certificate from GeeksforGeeks" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Interview Preparation Workshop</h4>
+                        <p class="cert-card__org">GeeksforGeeks × PCE Campus Body</p>
+                        <p class="cert-card__date">2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="3">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/local-code-live-url-workshop.jpg') }}" alt="Local Code to Live URL Workshop certificate" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Local Code to Live URL Workshop</h4>
+                        <p class="cert-card__org">KDK College of Engineering</p>
+                        <p class="cert-card__date">6 March 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="subsection__title reveal" style="margin-top: var(--space-xl);">Hackathon Credentials</h3>
+            <div class="certifications__grid reveal-group">
+                <div class="cert-card reveal" data-cert-index="4">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/pallotti-national-hackfest-2026.png') }}" alt="Pallotti National HackFest 2026 credential" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Pallotti National HackFest 2026</h4>
+                        <p class="cert-card__org">St. Vincent Pallotti College</p>
+                        <p class="cert-card__date">28–29 April 2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="5">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/tech-alfa-hackathon-2026.jpg') }}" alt="Tech Alfa Hackathon 2026 credential" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Tech Alfa Hackathon 2026</h4>
+                        <p class="cert-card__org">Widesoftech Pvt. Ltd.</p>
+                        <p class="cert-card__date">21–22 February 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="subsection__title reveal" style="margin-top: var(--space-xl);">Offer Letters &amp; Selections</h3>
+            <div class="certifications__grid reveal-group">
+                <div class="cert-card reveal" data-cert-index="6">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/widesoftech-python-internship-offer-letter.jpg') }}" alt="Widesoftech Python Internship offer letter" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Python Internship Offer Letter</h4>
+                        <p class="cert-card__org">Widesoftech Pvt. Ltd.</p>
+                        <p class="cert-card__date">2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="7">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/techfest-college-ambassador-offer-letter.jpg') }}" alt="Techfest IIT Bombay College Ambassador offer letter" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">Techfest College Ambassador</h4>
+                        <p class="cert-card__org">Techfest, IIT Bombay</p>
+                        <p class="cert-card__date">2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="8">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/ecell-campus-ambassador-offer-letter.jpg') }}" alt="E-Cell IIT Bombay Campus Ambassador offer letter" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">E-Cell Campus Ambassador</h4>
+                        <p class="cert-card__org">E-Cell, IIT Bombay</p>
+                        <p class="cert-card__date">2026</p>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-cert-index="9">
+                    <div class="cert-card__image-wrap">
+                        <img src="{{ url_for('static', filename='assets/credentials/gssoc-2026-ambassador-badge.png') }}" alt="GirlScript Summer of Code 2026 Ambassador badge" loading="lazy" width="480" height="300" onerror="this.parentElement.classList.add('cert-card__image-wrap--error');" />
+                    </div>
+                    <div class="cert-card__info">
+                        <h4 class="cert-card__title">GSSoC 2026 Ambassador</h4>
+                        <p class="cert-card__org">GirlScript Foundation</p>
+                        <p class="cert-card__date">2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+    ============================================================= -->
+    <section class="section" id="contact">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">09</span>
+                <h2 class="section__title">Get In Touch</h2>
+            </header>
+            <div class="contact__wrapper reveal">
+                <div class="contact__info">
+                    <p class="contact__intro">Have a question, want to collaborate, or just say hello? I'd love to hear from you!</p>
+                    <div class="contact__channels">
+                        <a href="https://www.linkedin.com/in/atharva-meshram-66ab302a5" target="_blank" rel="noopener noreferrer" class="contact__channel">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/4th4rv4-A" target="_blank" rel="noopener noreferrer" class="contact__channel">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="mailto:meshramatharva257@gmail.com" class="contact__channel">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <span>meshramatharva257@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+                <form class="contact__form" id="contact-form" novalidate>
+                    <div class="form__group">
+                        <label for="contact-name" class="form__label">Name</label>
+                        <input type="text" id="contact-name" name="name" class="form__input" placeholder="Your name" required autocomplete="name" maxlength="100" />
+                    </div>
+                    <div class="form__group">
+                        <label for="contact-email" class="form__label">Email</label>
+                        <input type="email" id="contact-email" name="email" class="form__input" placeholder="you@example.com" required autocomplete="email" maxlength="254" />
+                    </div>
+                    <div class="form__group">
+                        <label for="contact-message" class="form__label">Message</label>
+                        <textarea id="contact-message" name="message" class="form__input form__textarea" placeholder="Your message…" rows="5" required maxlength="5000"></textarea>
+                    </div>
+                    <!-- Honeypot — hidden from humans, bots fill it -->
+                    <div class="form__honeypot" aria-hidden="true">
+                        <label for="contact-website">Website</label>
+                        <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off" />
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full" id="contact-submit">
+                        Send Message
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                    <!-- ARIA live region for form status -->
+                    <div id="contact-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================= -->
+    <footer class="footer">
+        <div class="footer__inner container">
+            <div class="footer__brand">
+                <p class="footer__name">Atharva Anil Meshram</p>
+                <p class="footer__desc">B.Tech Computer Technology &bull; Aspiring Full-Stack Developer</p>
+            </div>
+            <div class="footer__socials">
+                <a href="https://www.linkedin.com/in/atharva-meshram-66ab302a5" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon social-icon--sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://github.com/4th4rv4-A" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon social-icon--sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="mailto:meshramatharva257@gmail.com" aria-label="Email" class="social-icon social-icon--sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+            </div>
+            <p class="footer__copy">&copy; <span id="footer-year">2026</span> Atharva Anil Meshram. Built with Flask &amp; vanilla JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- NO duplicate lightbox in HTML — the JS CertLightbox module creates it dynamically -->
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
