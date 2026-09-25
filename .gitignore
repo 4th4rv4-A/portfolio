@@ -28,3 +28,6 @@ htmlcov/
 
 # Byte-compiled
 *.pyc
+
+# Playwright MCP artifacts
+.playwright-mcp/
