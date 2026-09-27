@@ -136,7 +136,20 @@
         }
 
         return { init, updateColors: theme => { accentRGB = theme === 'light' ? [37, 99, 235] : [59, 130, 246]; } };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        2. SCROLL PROGRESS
@@ -152,7 +165,20 @@
         }
 
         return { init: () => window.addEventListener('scroll', onScroll, { passive: true }) };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        3. NAVBAR
@@ -213,7 +239,20 @@
         }
 
         return { init };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        4. THEME TOGGLE
@@ -245,7 +284,20 @@
         }
 
         return { init };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        5. ANIMATION SYSTEM (Reveal, Parallax, Cursor, Tilt)
@@ -339,7 +391,20 @@
                 init3DTilt();
             }
         };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        6. SKILLS RADAR (Chart.js)
@@ -434,7 +499,20 @@
             chart.options.scales.r.pointLabels.color = c.labels;
             chart.update();
         }};
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        7. CERTIFICATE LIGHTBOX (Robust single implementation)
@@ -541,7 +619,20 @@
         }
 
         return { init };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        8. CONTACT FORM
@@ -647,7 +738,20 @@
             });
         }
         return { init };
-    })();
+    
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
+
+})();
 
     /* ---------------------------------------------------------
        BOOTSTRAP
@@ -662,5 +766,18 @@
         try { CertLightbox.init(); } catch (e) { console.error('Lightbox failed:', e); }
         try { ContactForm.init(); } catch (e) { console.error('ContactForm failed:', e); }
     });
+
+
+    /* Image Error Handler (CSP-compliant) */
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+            if (e.target.classList.contains('hero__image')) {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) e.target.nextElementSibling.style.display = 'flex';
+            } else if (e.target.parentElement && e.target.parentElement.classList.contains('cert-card__image-wrap')) {
+                e.target.parentElement.classList.add('cert-card__image-wrap--error');
+            }
+        }
+    }, true);
 
 })();

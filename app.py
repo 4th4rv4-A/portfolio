@@ -169,9 +169,15 @@ def _send_email(name: str, email: str, message: str) -> bool:
 
     try:
         context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context, timeout=10) as server:
-            server.login(MAIL_USER, MAIL_PASS)
-            server.sendmail(MAIL_USER, MAIL_TO, msg.as_string())
+        if SMTP_PORT == 465:
+            with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context, timeout=10) as server:
+                server.login(MAIL_USER, MAIL_PASS)
+                server.sendmail(MAIL_USER, MAIL_TO, msg.as_string())
+        else:
+            with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=10) as server:
+                server.starttls(context=context)
+                server.login(MAIL_USER, MAIL_PASS)
+                server.sendmail(MAIL_USER, MAIL_TO, msg.as_string())
         logger.info("Email sent successfully.")
         return True
     except Exception as exc:
@@ -191,7 +197,7 @@ def set_security_headers(response):
         "script-src 'self' https://cdn.jsdelivr.net; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
-        "img-src 'self' data: https:; "
+        "img-src 'self' data:; "
         "connect-src 'self'; "
         "frame-src 'none'; "
         "object-src 'none'; "
@@ -217,6 +223,32 @@ def index():
     return render_template("index.html", site_url=config.get("SITE_URL"), resume_exists=resume_exists)
 
 
+@app.route("/robots.txt")
+def robots():
+    """Serve robots.txt."""
+    site_url = config.get("SITE_URL")
+    content = "User-agent: *\nAllow: /\n"
+    if site_url:
+        content += f"Sitemap: {site_url}/sitemap.xml\n"
+    return content, 200, {"Content-Type": "text/plain"}
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    """Serve sitemap.xml."""
+    site_url = config.get("SITE_URL")
+    if not site_url:
+        return "Not found", 404
+    
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{site_url}/</loc>
+  </url>
+</urlset>"""
+    return xml, 200, {"Content-Type": "application/xml"}
+
+
 @app.route("/contact", methods=["POST"])
 def contact():
     """
@@ -226,7 +258,7 @@ def contact():
     # --- Rate limiting ---
     client_ip = request.remote_addr or "unknown"
     if _is_rate_limited(client_ip):
-        return jsonify({"success": False, "message": "Too many requests. Please try again later."}), 429
+        return jsonify({"success": False, "message": "Too many requests. Please try again later."}), 429, {"Retry-After": "60"}
 
     data = request.get_json(silent=True)
     if data is None:

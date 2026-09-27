@@ -1,3 +1,5 @@
+
+
 """Tests for the /contact endpoint and error handlers.
 
 Covers: valid submission, invalid email, empty fields, oversized input,
@@ -236,3 +238,62 @@ def test_rate_limit_6th_request_returns_429(client):
     data = resp.get_json()
     assert data["success"] is False
     assert "Too many" in data["message"]
+
+
+# ── Additional Tests for new requirements ─────────────────────
+
+@patch('app.smtplib.SMTP_SSL')
+def test_honeypot_does_not_send_email(mock_smtp, client):
+    with patch.dict('app.config', {'MAIL_USER': 'u', 'MAIL_PASS': 'p', 'MAIL_TO': 't'}):
+        resp = post_contact(client, {
+            'name': 'Bot',
+            'email': 'bot@spam.com',
+            'message': 'Buy stuff!',
+            'website': 'http://spam.com',
+        })
+        assert resp.status_code == 200
+        mock_smtp.assert_not_called()
+
+
+def test_rate_limit_retry_after(client):
+    payload = {'name': 'X', 'email': 'a@b.com', 'message': 'Hi'}
+    for _ in range(5):
+        post_contact(client, payload)
+    resp = post_contact(client, payload)
+    assert resp.status_code == 429
+    assert resp.headers.get('Retry-After') == '60'
+
+
+@patch('app.time.time')
+def test_rate_window_expiry(mock_time, client):
+    mock_time.return_value = 1000.0
+    payload = {'name': 'X', 'email': 'a@b.com', 'message': 'Hi'}
+    for _ in range(5):
+        post_contact(client, payload)
+    
+    assert post_contact(client, payload).status_code == 429
+    
+    mock_time.return_value = 1061.0
+    resp = post_contact(client, payload)
+    assert resp.status_code == 200
+
+
+def test_413_payload_too_large(client):
+    large_payload = {'name': 'X', 'email': 'a@b.com', 'message': 'A' * (16 * 1024)}
+    resp = post_contact(client, large_payload)
+    assert resp.status_code == 413
+    assert resp.get_json()['success'] is False
+
+
+def test_500_handler_renders_custom_page(client):
+    from app import app, internal_error
+    with app.test_request_context():
+        # Wrap the returned tuple in a Flask response to allow get_data()
+        resp = app.make_response(internal_error(Exception("boom")))
+        body = resp.get_data(as_text=True)
+    assert resp.status_code == 500
+    assert "Server Error" in body
+    assert "Something went wrong on our end" in body
+    assert "Internal Server Error" not in body
+
+

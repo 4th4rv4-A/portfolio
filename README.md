@@ -73,8 +73,9 @@ This portfolio is configured to run behind any standard WSGI HTTP Server like Gu
 
 **Example startup command for production:**
 ```bash
-gunicorn wsgi:app
+gunicorn -w 1 --threads 8 wsgi:app
 ```
+*(Using a single worker ensures the in-memory rate limiter tracks requests correctly across the application.)*
 (A `Procfile` is also included for compatibility with platforms like Heroku or Render.)
 
 ---
