@@ -42,8 +42,8 @@
         let animId, w, h, dpr;
 
         const PARTICLE_COUNT = isMobile ? 14 : 26;
-        let accentRGB = [76, 125, 255];   // matches --accent (dark)
-        let alpha = 0.16;                  // kept deliberately subtle
+        let accentRGB = [226, 121, 79];   // ember (dark) / terracotta (light)
+        let alpha = 0.13;                  // kept deliberately subtle
 
         function resize() {
             dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -118,11 +118,11 @@
             init,
             updateColors: theme => {
                 if (theme === 'light') {
-                    accentRGB = [47, 95, 224];
-                    alpha = 0.12;
+                    accentRGB = [198, 93, 59];
+                    alpha = 0;              // day is clean paper — no dust
                 } else {
-                    accentRGB = [76, 125, 255];
-                    alpha = 0.16;
+                    accentRGB = [226, 121, 79];
+                    alpha = 0.13;
                 }
             }
         };
@@ -218,7 +218,7 @@
             localStorage.setItem('theme', theme);
 
             const metaTheme = qs('meta[name="theme-color"]');
-            if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#fafafa' : '#0a0a0f');
+            if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#faf7f2' : '#0d1117');
 
             Atmosphere.updateColors(theme);
             if (window.SkillsRadar) window.SkillsRadar.updateTheme(theme);
@@ -279,10 +279,10 @@
         function getColors(theme) {
             const isDark = theme !== 'light';
             return {
-                accent: isDark ? '#4c7dff' : '#2f5fe0',
-                accentGlow: isDark ? 'rgba(76,125,255,0.18)' : 'rgba(47,95,224,0.12)',
-                grid: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(23,23,28,0.12)',
-                labels: isDark ? '#9b9ba8' : '#55555e'
+                accent: isDark ? '#e2794f' : '#c65d3b',
+                accentGlow: isDark ? 'rgba(226,121,79,0.18)' : 'rgba(198,93,59,0.12)',
+                grid: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(26,23,18,0.12)',
+                labels: isDark ? '#9aa3b2' : '#5a5347'
             };
         }
 
