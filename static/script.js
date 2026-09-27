@@ -29,7 +29,9 @@
 
 
     /* ---------------------------------------------------------
-       1. ATMOSPHERE — Canvas Particle Field (Optimized)
+       1. ATMOSPHERE — Subtle ambient dust (Premium: calm, no gimmicks)
+       Sparse, slow-drifting particles at low opacity. No lines,
+       no mouse interaction. Purely ambient depth behind content.
     --------------------------------------------------------- */
     const Atmosphere = (function () {
         const canvas = qs('#atmosphere');
@@ -37,18 +39,18 @@
 
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: -1000, y: -1000 };
-        let animId, w, h;
-        
-        // Performance safeguards: fewer particles on mobile, no connections
-        const PARTICLE_COUNT = isMobile ? 20 : 45;
-        const CONNECTION_DIST = 120;
-        const MOUSE_RADIUS = 100;
-        let accentRGB = [59, 130, 246]; // Default blue
+        let animId, w, h, dpr;
+
+        const PARTICLE_COUNT = isMobile ? 14 : 26;
+        let accentRGB = [76, 125, 255];   // matches --accent (dark)
+        let alpha = 0.16;                  // kept deliberately subtle
 
         function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            w = canvas.width = Math.floor(window.innerWidth * dpr);
+            h = canvas.height = Math.floor(window.innerHeight * dpr);
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
         }
 
         function createParticles() {
@@ -57,9 +59,9 @@
                 particles.push({
                     x: Math.random() * w,
                     y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * (isMobile ? 0.15 : 0.25),
-                    vy: (Math.random() - 0.5) * (isMobile ? 0.15 : 0.25),
-                    size: Math.random() * 1.5 + 0.5,
+                    vx: (Math.random() - 0.5) * 0.1 * dpr,
+                    vy: (Math.random() - 0.5) * 0.1 * dpr,
+                    size: (Math.random() * 1.2 + 0.4) * dpr,
                     phase: Math.random() * Math.PI * 2
                 });
             }
@@ -67,19 +69,8 @@
 
         function update(t) {
             for (let p of particles) {
-                p.x += p.vx + Math.sin(p.phase + t * 0.0003) * 0.12;
-                p.y += p.vy + Math.cos(p.phase + t * 0.00025) * 0.12;
-
-                if (!isMobile) {
-                    const dx = p.x - mouse.x;
-                    const dy = p.y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < MOUSE_RADIUS && dist > 0) {
-                        const force = (1 - dist / MOUSE_RADIUS) * 1.5;
-                        p.x += (dx / dist) * force;
-                        p.y += (dy / dist) * force;
-                    }
-                }
+                p.x += p.vx + Math.sin(p.phase + t * 0.00015) * 0.04 * dpr;
+                p.y += p.vy + Math.cos(p.phase + t * 0.00012) * 0.04 * dpr;
 
                 if (p.x < -10) p.x = w + 10;
                 if (p.x > w + 10) p.x = -10;
@@ -91,30 +82,10 @@
         function draw() {
             ctx.clearRect(0, 0, w, h);
             const [r, g, b] = accentRGB;
-
-            if (!isMobile) {
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < CONNECTION_DIST) {
-                            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
-
             for (let p of particles) {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${r},${g},${b},0.4)`;
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
                 ctx.fill();
             }
         }
@@ -135,11 +106,6 @@
                 resizeTimer = setTimeout(() => { resize(); createParticles(); }, 200);
             }, { passive: true });
 
-            if (!isMobile) {
-                window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-                window.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
-            }
-
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) cancelAnimationFrame(animId);
                 else animId = requestAnimationFrame(loop);
@@ -148,8 +114,19 @@
             animId = requestAnimationFrame(loop);
         }
 
-        return { init, updateColors: theme => { accentRGB = theme === 'light' ? [37, 99, 235] : [59, 130, 246]; } };
-})();
+        return {
+            init,
+            updateColors: theme => {
+                if (theme === 'light') {
+                    accentRGB = [47, 95, 224];
+                    alpha = 0.12;
+                } else {
+                    accentRGB = [76, 125, 255];
+                    alpha = 0.16;
+                }
+            }
+        };
+    })();
 
     /* ---------------------------------------------------------
        2. SCROLL PROGRESS
@@ -241,7 +218,7 @@
             localStorage.setItem('theme', theme);
 
             const metaTheme = qs('meta[name="theme-color"]');
-            if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#f0f0f5' : '#03040f');
+            if (metaTheme) metaTheme.setAttribute('content', theme === 'light' ? '#fafafa' : '#0a0a0f');
 
             Atmosphere.updateColors(theme);
             if (window.SkillsRadar) window.SkillsRadar.updateTheme(theme);
@@ -261,14 +238,14 @@
 })();
 
     /* ---------------------------------------------------------
-       5. ANIMATION SYSTEM (Reveal, Parallax, Cursor, Tilt)
+       5. REVEALS (calm scroll-in; tilt/cursor/parallax removed)
     --------------------------------------------------------- */
     const AnimationSystem = (function () {
         function initReveals() {
             if (isReducedMotion) return;
             const reveals = qsa('.reveal');
-            
-            // Set delay variable based on child index in group
+
+            // Stagger delay based on child index within a group
             qsa('.reveal-group').forEach(group => {
                 Array.from(group.querySelectorAll('.reveal')).forEach((el, i) => {
                     el.style.setProperty('--index', i);
@@ -287,72 +264,10 @@
             reveals.forEach(el => observer.observe(el));
         }
 
-        function initParallax() {
-            if (isReducedMotion) return;
-            const root = document.documentElement;
-            window.addEventListener('scroll', () => {
-                // Update CSS custom property instead of direct transform to avoid conflicts
-                root.style.setProperty('--parallax-rotate', `${window.scrollY * 0.05}deg`);
-            }, { passive: true });
-        }
-
-        function initCursorGlow() {
-            const glow = qs('#cursor-glow');
-            if (!glow || isReducedMotion || isMobile) {
-                if (glow) glow.style.display = 'none';
-                return;
-            }
-
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-            let currentX = mouseX;
-            let currentY = mouseY;
-
-            window.addEventListener('mousemove', e => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }, { passive: true });
-
-            // Smooth interpolation
-            function animateGlow() {
-                currentX += (mouseX - currentX) * 0.1;
-                currentY += (mouseY - currentY) * 0.1;
-                glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-                requestAnimationFrame(animateGlow);
-            }
-            requestAnimationFrame(animateGlow);
-        }
-
-        function init3DTilt() {
-            if (isReducedMotion || isMobile) return;
-            
-            qsa('[data-tilt]').forEach(el => {
-                el.addEventListener('mousemove', e => {
-                    const rect = el.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const xPct = x / rect.width - 0.5;
-                    const yPct = y / rect.height - 0.5;
-                    
-                    // Max tilt: 10deg
-                    el.style.transform = `perspective(1000px) rotateY(${xPct * 10}deg) rotateX(${yPct * -10}deg) translateZ(10px)`;
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    el.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
-                });
-            });
-        }
-
         return {
-            init: () => {
-                initReveals();
-                initParallax();
-                initCursorGlow();
-                init3DTilt();
-            }
+            init: () => { initReveals(); }
         };
-})();
+    })();
 
     /* ---------------------------------------------------------
        6. SKILLS RADAR (Chart.js)
@@ -364,10 +279,10 @@
         function getColors(theme) {
             const isDark = theme !== 'light';
             return {
-                accent: isDark ? '#3b82f6' : '#2563eb',
-                accentGlow: isDark ? 'rgba(59,130,246,0.2)' : 'rgba(37,99,235,0.12)',
-                grid: isDark ? 'rgba(140,144,159,0.15)' : 'rgba(140,144,159,0.2)',
-                labels: isDark ? '#e1e1f4' : '#11121f'
+                accent: isDark ? '#4c7dff' : '#2f5fe0',
+                accentGlow: isDark ? 'rgba(76,125,255,0.18)' : 'rgba(47,95,224,0.12)',
+                grid: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(23,23,28,0.12)',
+                labels: isDark ? '#9b9ba8' : '#55555e'
             };
         }
 
