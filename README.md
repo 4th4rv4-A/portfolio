@@ -1,28 +1,28 @@
 # Atharva Anil Meshram — Portfolio
 
-A modern, high-performance developer portfolio built with Python, Flask, and vanilla web technologies. It features a custom "Cyber-Minimalist" design system, interactive 3D elements, a particle physics engine, and secure backend routing.
+A modern, high-performance developer portfolio built with Python, Flask, and vanilla web technologies. It features the "Editorial Day / Glass Night" design system, ensuring an elegant reading experience by day and a sleek, glassy interface by night.
+
+Live Site: [https://portfolio-red-one-hri03mzsfp.vercel.app/](https://portfolio-red-one-hri03mzsfp.vercel.app/)
 
 ## Technology Stack
 
 - **Backend:** Python 3, Flask, Gunicorn
 - **Frontend:** HTML5, CSS3 (Custom Properties/Variables), Vanilla JavaScript
 - **Data Viz:** Chart.js (Skills Radar)
-- **Deployment:** WSGI-ready, PaaS-compatible (Procfile included)
+- **Deployment:** WSGI-ready, Vercel-compatible
 
 ## Features
 
-- **Cyber-Minimalist Design System:** Robust CSS variables for effortless light/dark mode switching and consistent theming.
-- **Hardware-Accelerated Animations:** Custom `requestAnimationFrame` particle engine and IntersectionObserver-driven scroll reveals with automatic graceful degradation on mobile and for users who prefer reduced motion.
-- **Dynamic 3D Tilt:** Matrix transformations applied to project cards for an interactive feel.
+- **Editorial Day / Glass Night Design System:** Robust CSS variables for effortless light/dark mode switching and consistent theming.
+- **Accessible and Responsive:** Keyboard-focusable elements, ARIA labels, semantic HTML landmarks (`<main>`), and graceful degradation for users who prefer reduced motion.
 - **Secure Contact Form:** 
   - Server-side email handling via SMTP (no client-side exposure of API keys or credentials)
   - HTML injection prevention
   - Rate limiting (5 requests / minute)
   - Honeypot bot protection
   - Size and length limits on all inputs
-- **Fully Accessible:** Semantic HTML structure, `aria` attributes on custom controls, keyboard-trappable lightbox, and a "Skip to Content" link.
-- **Custom Error Pages:** Stylized 404 and 500 error handlers that prevent information leakage.
-- **SEO Optimized:** Complete with OpenGraph tags, JSON-LD schema markup, and distinct canonical structure.
+- **Custom Error Pages:** Stylized 404 and 500 error handlers that prevent information leakage and respect user theme preference.
+- **SEO Optimized:** Complete with OpenGraph tags, JSON-LD schema markup, and distinct canonical structure based on `SITE_URL`.
 
 ## Local Development Setup
 
@@ -51,7 +51,7 @@ A modern, high-performance developer portfolio built with Python, Flask, and van
    ```bash
    cp .env.example .env
    ```
-   *Note: Set `FLASK_DEBUG=1` for local development. To test the contact form, provide valid SMTP credentials. To enable absolute URLs for SEO metadata, set `SITE_URL`.*
+   *Note: Set `FLASK_DEBUG=1` for local development. To test the contact form, provide valid SMTP credentials.*
 
 5. **Run the Flask server**
    ```bash
@@ -67,16 +67,17 @@ This project includes a comprehensive pytest suite to verify backend security, r
 pytest tests/
 ```
 
-## Production Deployment
+## Production Deployment (Vercel)
 
-This portfolio is configured to run behind any standard WSGI HTTP Server like Gunicorn.
+This portfolio is configured to run on Vercel as a Python serverless function. 
 
-**Example startup command for production:**
-```bash
-gunicorn -w 1 --threads 8 wsgi:app
-```
-*(Using a single worker ensures the in-memory rate limiter tracks requests correctly across the application.)*
-(A `Procfile` is also included for compatibility with platforms like Heroku or Render.)
+**Important Vercel Configuration:**
+You must manually configure the following Environment Variables in your Vercel project settings:
+- `SITE_URL`: Set this to your live domain (e.g. `https://portfolio-red-one-hri03mzsfp.vercel.app`). This is required for correct canonical tags, Open Graph preview image links, and `sitemap.xml` generation.
+- `MAIL_USER`, `MAIL_PASS`, `MAIL_TO`: Set these to enable the contact form. `MAIL_PASS` should be an app-specific password if using Gmail.
+- `SECRET_KEY`: A secure random string for Flask sessions (if needed).
+
+No `.env` file should be committed to the repository.
 
 ---
 *Designed & Built by [Atharva Meshram](https://github.com/4th4rv4-A).*

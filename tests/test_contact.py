@@ -175,6 +175,33 @@ def test_html_injection_escaping(mock_smtp, client):
 
 
 @patch("app.smtplib.SMTP_SSL")
+def test_subject_punctuation_not_escaped(mock_smtp, client):
+    """Ensure punctuation in the name is not HTML-escaped in the subject."""
+    with patch.dict("app.config", {"MAIL_USER": "u", "MAIL_PASS": "p", "MAIL_TO": "t"}):
+        resp = post_contact(client, {
+            "name": 'Atharva "The Great" & Co.',
+            "email": "a@b.com",
+            "message": "Hi"
+        })
+        assert resp.status_code == 200
+        
+        import email
+        mock_smtp_instance = mock_smtp.return_value.__enter__.return_value
+        args, _ = mock_smtp_instance.sendmail.call_args
+        email_body = args[2]
+        
+        parsed_email = email.message_from_string(email_body)
+        from email.header import decode_header
+        decoded_subject_parts = decode_header(parsed_email["Subject"])
+        subject = "".join(
+            part.decode(encoding or "utf-8") if isinstance(part, bytes) else part
+            for part, encoding in decoded_subject_parts
+        )
+        assert 'Atharva "The Great" & Co.' in subject
+        assert '&quot;' not in subject
+
+
+@patch("app.smtplib.SMTP_SSL")
 def test_header_injection_newlines_stripped(mock_smtp, client):
     """Ensure newlines are stripped from name and email to prevent header injection."""
     with patch.dict("app.config", {"MAIL_USER": "u", "MAIL_PASS": "p", "MAIL_TO": "t"}):

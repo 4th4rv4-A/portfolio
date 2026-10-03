@@ -13,6 +13,7 @@ import logging
 import collections
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import threading
 
 from flask import Flask, render_template, request, jsonify
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -26,9 +27,6 @@ app.config["MAX_CONTENT_LENGTH"] = 16 * 1024  # 16 KB max request size
 
 # Configure proxy handling so rate limiting works correctly on deployments like Vercel
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
-
-# Use a secret key from env (needed for session security if ever used)
-app.secret_key = os.environ.get("SECRET_KEY", "dev-change-me-in-production")
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -75,6 +73,9 @@ def load_config() -> dict:
 
 config = load_config()
 
+# Use a secret key from env (needed for session security if ever used). Loaded after env vars.
+app.secret_key = os.environ.get("SECRET_KEY", "dev-change-me-in-production")
+
 # ---------------------------------------------------------------------------
 # In-memory rate limiter  —  max 5 requests per 60 seconds per IP
 # ---------------------------------------------------------------------------
@@ -86,6 +87,7 @@ RATE_WINDOW = 60  # seconds
 # request count by the number of workers. For correct cross-worker rate limiting
 # in production, replace this dict with a shared store such as Redis.
 _rate_store: dict[str, list[float]] = collections.defaultdict(list)
+_rate_lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Field length limits
@@ -99,18 +101,19 @@ def _is_rate_limited(ip: str) -> bool:
     """Return True if *ip* has exceeded RATE_LIMIT requests within RATE_WINDOW."""
     now = time.time()
 
-    # Probabilistically clean up stale IPs to prevent unbounded memory growth
-    if random.random() < 0.05:
-        stale_keys = [k for k, timestamps in _rate_store.items() if not [t for t in timestamps if now - t < RATE_WINDOW]]
-        for k in stale_keys:
-            _rate_store.pop(k, None)
+    with _rate_lock:
+        # Probabilistically clean up stale IPs to prevent unbounded memory growth
+        if random.random() < 0.05:
+            stale_keys = [k for k, timestamps in _rate_store.items() if not [t for t in timestamps if now - t < RATE_WINDOW]]
+            for k in stale_keys:
+                _rate_store.pop(k, None)
 
-    # Prune timestamps older than the window
-    _rate_store[ip] = [t for t in _rate_store[ip] if now - t < RATE_WINDOW]
-    if len(_rate_store[ip]) >= RATE_LIMIT:
-        return True
-    _rate_store[ip].append(now)
-    return False
+        # Prune timestamps older than the window
+        _rate_store[ip] = [t for t in _rate_store[ip] if now - t < RATE_WINDOW]
+        if len(_rate_store[ip]) >= RATE_LIMIT:
+            return True
+        _rate_store[ip].append(now)
+        return False
 
 
 # ---------------------------------------------------------------------------
@@ -133,12 +136,13 @@ def _send_email(name: str, email: str, message: str) -> bool:
         logger.warning("MAIL_USER / MAIL_PASS / MAIL_TO not set — skipping email send.")
         return False
 
-    # Escape user input to prevent HTML injection
+    # Escape user input to prevent HTML injection in the body
     safe_name = html.escape(name)
     safe_email = html.escape(email)
     safe_message = html.escape(message).replace("\n", "<br>")
 
-    subject = f"Portfolio Contact — {safe_name}"
+    # Use raw name for subject (header injection is prevented by stripping newlines previously)
+    subject = f"Portfolio Contact — {name}"
 
     html_body = f"""\
 <html>
@@ -261,7 +265,7 @@ def contact():
         return jsonify({"success": False, "message": "Too many requests. Please try again later."}), 429, {"Retry-After": "60"}
 
     data = request.get_json(silent=True)
-    if data is None:
+    if not isinstance(data, dict):
         return jsonify({"success": False, "message": "Invalid request format."}), 400
 
     raw_name = data.get("name", "")

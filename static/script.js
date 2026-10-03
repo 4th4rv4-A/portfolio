@@ -97,6 +97,8 @@
         }
 
         function init() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            if (currentTheme === 'light') { alpha = 0; }
             resize();
             createParticles();
 
@@ -331,8 +333,10 @@
             
             // Link chips to chart highlighting
             qsa('.skill-chip[data-axis]').forEach(chip => {
-                chip.addEventListener('mouseenter', () => {
+                const handleActive = () => {
                     if (!chart) return;
+                    qsa('.skill-chip[data-axis]').forEach(c => c.setAttribute('aria-pressed', 'false'));
+                    chip.setAttribute('aria-pressed', 'true');
                     const axis = parseInt(chip.dataset.axis);
                     chart.data.datasets[0].pointBackgroundColor = [85, 75, 80, 70, 65, 50].map((_, i) => 
                         i === axis ? '#ffffff' : chart.data.datasets[0].borderColor
@@ -341,13 +345,19 @@
                         i === axis ? 8 : 4
                     );
                     chart.update();
-                });
-                chip.addEventListener('mouseleave', () => {
+                };
+                const handleInactive = () => {
                     if (!chart) return;
+                    chip.setAttribute('aria-pressed', 'false');
                     chart.data.datasets[0].pointBackgroundColor = chart.data.datasets[0].borderColor;
                     chart.data.datasets[0].pointRadius = 4;
                     chart.update();
-                });
+                };
+                chip.addEventListener('mouseenter', handleActive);
+                chip.addEventListener('focus', handleActive);
+                chip.addEventListener('click', handleActive);
+                chip.addEventListener('mouseleave', handleInactive);
+                chip.addEventListener('blur', handleInactive);
             });
         }
 
@@ -379,6 +389,7 @@
             lb.id = 'dynamic-lightbox';
             lb.setAttribute('role', 'dialog');
             lb.setAttribute('aria-modal', 'true');
+            lb.setAttribute('aria-label', 'Certificate Viewer');
             lb.innerHTML = `
                 <div class="lightbox__header">
                     <span class="lightbox__caption" id="lb-caption"></span>
@@ -431,7 +442,17 @@
                 const titleEl = qs('.cert-card__title', card);
                 if (imgEl && titleEl) {
                     certs.push({ src: imgEl.src, alt: imgEl.alt, title: titleEl.textContent });
-                    qs('.cert-card__image-wrap', card).addEventListener('click', () => open(idx));
+                    const wrap = qs('.cert-card__image-wrap', card);
+                    wrap.setAttribute('tabindex', '0');
+                    wrap.setAttribute('role', 'button');
+                    wrap.setAttribute('aria-label', `View ${titleEl.textContent} certificate`);
+                    wrap.addEventListener('click', () => open(idx));
+                    wrap.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            open(idx);
+                        }
+                    });
                 }
             });
 

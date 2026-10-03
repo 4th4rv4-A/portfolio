@@ -20,7 +20,7 @@
     /* Text */
     --text: #eceef2;
     --text-dim: #9aa3b2;
-    --text-muted: #5f6875;
+    --text-muted: #798394;
 
     /* Lines */
     --border: rgba(255, 255, 255, 0.1);
@@ -105,7 +105,7 @@
 
     --text: #1a1712;
     --text-dim: #5a5347;
-    --text-muted: #8b8374;
+    --text-muted: #6b6355;
 
     --border: rgba(26, 23, 18, 0.14);
     --border-strong: rgba(26, 23, 18, 0.34);
@@ -461,7 +461,7 @@ html.theme-transition .contact__form {
 .navbar__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* Mobile nav panel */
-@media (max-width: 1024px) {
+@media (max-width: 1150px) {
     .navbar__hamburger { display: inline-flex; }
 
     .navbar__links {
@@ -1844,8 +1844,8 @@ html.js .reveal.visible {
     :root { --container: 1160px; }
 }
 
-/* Laptop / tablet landscape (≤1024px): nav collapses, grids go 2-col */
-@media (max-width: 1024px) {
+/* Laptop / tablet landscape (≤1150px): nav collapses, grids go 2-col */
+@media (max-width: 1150px) {
     .projects__grid { grid-template-columns: repeat(2, 1fr); }
     .hackathons__grid { grid-template-columns: repeat(2, 1fr); }
     .certifications__grid { grid-template-columns: repeat(2, 1fr); }
@@ -1861,11 +1861,12 @@ html.js .reveal.visible {
     }
 
     .hero__text {
-        order: 2;
+        order: 1;
     }
 
     .hero__visual {
-        order: 1;
+        order: 2;
+        margin-top: 1rem;
     }
 
     .hero__buttons,
